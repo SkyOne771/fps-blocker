@@ -21,6 +21,8 @@ The optional AMD tool requires 64-bit Windows Python and an AMD driver providing
 - For controller or diagnostic changes, cover meaningful state transitions, failures, and restoration behavior with fake adapters.
 - For native binding changes, check structure sizes and function signatures on Windows.
 - Keep the README accurate about display refresh rate versus GPU-rendered FPS.
+- Include a relevant `README.md` or `docs/*.md` update whenever runtime code or CI workflows change. GitHub's **Documentation sync** check enforces this alongside local link/image validation. It checks the push's commit range or the pull request's changes; reviewers must still verify the prose.
+- On a committed branch, run `python tools/check_docs_sync.py --base origin/main --head HEAD` to check documentation against the target branch. For a direct main commit, use `--base HEAD~1` after committing.
 - Document hardware checks separately from automated tests. Do not describe an untested panel, driver, or monitor layout as supported by hardware evidence.
 
 `tests/windows_smoke.py` checks native bindings and GUI layout. Adding `--switch` deliberately changes the foreground monitor's refresh rate briefly and restores it; use it only when you intend to test your display.

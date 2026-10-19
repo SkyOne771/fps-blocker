@@ -21,7 +21,8 @@ FPS Blocker detects the foreground browser, applies a supported refresh-rate lim
 - **21 refresh presets:** 24–540 Hz, including 60, 120, 144, 165, 240, 300, and 360 Hz. Only driver-reported modes at the existing resolution are eligible.
 - **Reversible changes:** restores the original rate on pause, normal exit, or switching to another app. Failed restoration retains the original mode for retry.
 - **AMD diagnostics:** an optional command-line tool inspects FreeSync, backs up its state before disabling it, verifies readback, and supports restoration.
-- **Automated checks:** 12 unit tests plus Windows CI checks for native structure layout and API binding.
+- **Automated checks:** unit tests plus Windows CI checks for native structure layout and API binding.
+- **Documentation checks:** CI requires a README or technical-doc update alongside runtime/workflow changes and validates local documentation links and images.
 
 ## Quick start
 
@@ -107,6 +108,13 @@ The switching check verifies the active rate and resolution, restores the origin
 ## Contributing and license
 
 See [CONTRIBUTING.md](CONTRIBUTING.md) for setup, checks, and useful bug-report details. Contributions and issue reports are welcome.
+
+Documentation is maintained with the code: every push and pull request runs a
+documentation check. Runtime or workflow changes must include a `README.md` or
+`docs/*.md` update in the compared change. The check also catches missing local
+link and image targets. Contributors still review the prose for accuracy; CI
+cannot verify that an explanation matches the behavior. Future coding agents
+receive the same maintenance instructions in [AGENTS.md](AGENTS.md).
 
 Released under the [MIT License](LICENSE).
 

@@ -10,6 +10,7 @@ FPS Blocker separates the desktop interface, the foreground-window policy, and t
 | `fps_blocker/controller.py` | Decide when to limit a monitor and when to restore its original mode |
 | `fps_blocker/windows.py` | Win32 foreground-process lookup, monitor detection, mode enumeration, test/apply/reset |
 | `tools/amd_freesync.py` | Optional AMD ADL enumeration, FreeSync inspection, backup, change, readback and restoration |
+| `tools/check_docs_sync.py` | CI code/docs change policy and validation of local Markdown links and HTML image targets |
 | `tests/test_controller.py` | Focus, monitor handoff, unsupported rates, failed changes and restoration retries |
 | `tests/test_amd_freesync.py` | Backup preservation, restoration identity checks, no-op behavior and rollback |
 | `tests/windows_smoke.py` | Manual native binding, GUI layout and optional physical display checks |
@@ -50,7 +51,14 @@ The tool does not request `ADL_Flush_Driver_Data`, so it makes no guarantee that
 
 ## Validation
 
-The automated suite contains 12 tests. Windows CI also checks that `DEVMODE` is 220 bytes, `MONITORINFO` is 104 bytes, and the Win32 adapter binds successfully.
+The automated suite covers controller, FreeSync diagnostic, and documentation-check behavior. Windows CI also checks that `DEVMODE` is 220 bytes, `MONITORINFO` is 104 bytes, and the Win32 adapter binds successfully.
+
+A separate **Documentation sync** CI job compares the pushed commit range, or
+the pull request's base with the checked-out head. Changes to application Python,
+tool Python, root batch launchers, or CI workflows require an accompanying README
+or technical-doc update. The job also validates local documentation link/image
+targets. This detects omitted docs and broken paths, not semantic inaccuracies;
+documentation still needs human or agent review alongside the implementation.
 
 Observed local results:
 
