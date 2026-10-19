@@ -1,0 +1,13 @@
+name: Check Windows utility
+on: [push, pull_request]
+jobs:
+  test:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python -m unittest discover -s tests -v
+      - name: Check Win32 structure layout and binding
+        run: python -c "import ctypes; from fps_blocker.windows import DEVMODE, MONITORINFO, Windows; assert ctypes.sizeof(DEVMODE) == 220; assert ctypes.sizeof(MONITORINFO) == 104; Windows()"
